@@ -1,0 +1,13 @@
+.moviesDetails {
+  margin: 4% 0;
+  justify-content: center;
+  flex: auto;
+  text-align: center;
+}
+.title {
+  color: beige;
+}
+
+.Mahmoud {
+  width: 500px;
+}

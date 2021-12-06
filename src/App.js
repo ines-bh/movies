@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Switch, Route } from "react-router-dom";
 
 import "./App.css";
 import Movies from "./components/moviesdata/moviesdata";
@@ -7,6 +8,7 @@ import MoviesCard from "./components/moviescard/moviescard";
 import Rating from "./components/rating/rating";
 import Search from "./components/search/search";
 import AddMovie from "./components/addmovies/add";
+import MovieDetails from "./components/moviedetail/moviedetail";
 
 function App() {
   const [movies, setMovies] = useState(Movies);
@@ -16,17 +18,33 @@ function App() {
 
   return (
     <div className="App">
-      <div className="filterPart">
-        <Search title={title} setTitle={setTitle} />
-        <Rating
-          isFilter={true}
-          ratingValue={ratingValue}
-          setRatingValue={setRatingValue}
-        />
-      </div>
+      <Switch>
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <div>
+              <div className="filterPart">
+                <Search title={title} setTitle={setTitle} />
+                <Rating
+                  isFilter={true}
+                  ratingValue={ratingValue}
+                  setRatingValue={setRatingValue}
+                />
+              </div>
 
-      <AddMovie movies={movies} setMovies={setMovies} />
-      <MoviesLists movies={movies} title={title} ratingValue={ratingValue} />
+              <AddMovie movies={movies} setMovies={setMovies} />
+
+              <MoviesLists
+                movies={movies}
+                title={title}
+                ratingValue={ratingValue}
+              />
+            </div>
+          )}
+        />
+        <Route path="/movie/:id" component={MovieDetails} />
+      </Switch>
     </div>
   );
 }
